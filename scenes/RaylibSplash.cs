@@ -9,6 +9,7 @@ public class RaylibSplash: Scene {
     private Rectangle square = new();
     private uint framecount = 0;
     private ATexture raylib_logo;
+    private AMusic background_music;
     private SceneManager sceneMgr_instance;
 
     public RaylibSplash(ref SceneManager scenemgrptr) {
@@ -25,6 +26,9 @@ public class RaylibSplash: Scene {
         this.square.height = 20f;
 
         this.raylib_logo = new("assets/raylib_256x256.png");
+        this.background_music = new("assets/come_play_with_me.mp3");
+        this.background_music.SetVolume(0.4f);
+        this.background_music.Play();
     }
 
     override public void Draw() {
@@ -36,9 +40,11 @@ public class RaylibSplash: Scene {
 
     override public void Update(float deltatime) {
         Raylib.ClearBackground(Raylib.BEIGE);
+        this.background_music.Update();
     }
 
     override public void Deinitialise() {
-        Raylib.TraceLog(TraceLogLevel.LOG_DEBUG, $"RaylibSplash: there's nothing to deinitialise.");
+        this.background_music.Stop();
+        this.background_music.Dispose();
     }
 }

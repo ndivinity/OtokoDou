@@ -37,6 +37,9 @@ class Dousa {
         }
 
         Raylib.InitWindow(800, 600, "男らしい動作");
+        Raylib.SetTargetFPS(60);
+        Raylib.SetConfigFlags(ConfigFlags.FLAG_MSAA_4X_HINT | ConfigFlags.FLAG_VSYNC_HINT);
+        Raylib.InitAudioDevice();
 
         sceneMgr.RegisterScene("RaylibSplash", new RaylibSplash(ref sceneMgr));
         sceneMgr.RegisterScene("DisclaimerSplash", new DisclaimerSplash(ref sceneMgr));
@@ -52,6 +55,8 @@ class Dousa {
             sceneMgr.Draw();
             Raylib.EndDrawing();
         }
+
+        Raylib.CloseAudioDevice();
         Raylib.CloseWindow();
     }
 }
